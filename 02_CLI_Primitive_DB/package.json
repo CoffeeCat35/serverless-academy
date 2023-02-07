@@ -1,0 +1,17 @@
+{
+  "type": "commonjs",
+  "name": "primitive-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node 02_cli_primitive_db.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikita",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "inquirer-loop": "^0.3.0"
+  }
+}
