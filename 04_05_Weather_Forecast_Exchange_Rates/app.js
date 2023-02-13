@@ -50,7 +50,6 @@ const ForecastOptions = {
             [
                 [{ text: 'At intervals of 3 hours', callback_data: '/weatherIntervalThree' }],
                 [{ text: 'At intervals of 6 hours', callback_data: '/weatherIntervalSix' }],
-                [{ text: 'Stop interval', callback_data: '/weatherIntervalSix' }],
                 [{ text: 'Back To Start', callback_data: '/back' }],
             ]
     }
@@ -80,22 +79,10 @@ bot.on('message', (msg) => {
         return bot.sendMessage(chatId, "Choose currency", ExchangeRatesOptions);
     }
     else if (msg.text === 'At intervals of 3 hours') { //if user pressd 'At intervals of 3 hours' clear last interval and set inteval in 3 hours
-        clearInterval(ForecastSixHoursInterval);
-        SendMessageWithWeatherDataWithInterval(chatId);
-        ForecastInThreeHoursInterval = setInterval(() => {
-            SendMessageWithWeatherDataWithInterval(chatId);
-        }, 10800000);
+        SendMessageWithWeatherDataWithInterval(chatId, 3);
     }
     else if (msg.text === 'At intervals of 6 hours') { //if user pressd 'At intervals of 6 hours' clear last interval and set inteval in 6 hours
-        clearInterval(ForecastInThreeHoursInterval);
-        SendMessageWithWeatherDataWithInterval(chatId);
-        ForecastSixHoursInterval = setInterval(() => {
-            SendMessageWithWeatherDataWithInterval(chatId);
-        }, 21600000);
-    }
-    else if (msg.text === 'Stop interval') {  //if user pressd 'Stop interval' clear last interval
-        clearInterval(ForecastInThreeHoursInterval);
-        clearInterval(ForecastSixHoursInterval);
+        SendMessageWithWeatherDataWithInterval(chatId, 6);
     }
     else if (msg.text === 'EUR') { //if user pressd 'EUR' show all exchange rate for euro
         ExchangeRatesInEURToGRNPrivateBank(chatId);
@@ -110,14 +97,27 @@ bot.on('message', (msg) => {
     }
 })
 
-function SendMessageWithWeatherDataWithInterval(chatId) {
+function SendMessageWithWeatherDataWithInterval(chatId, TimeInterval) {
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Penrith&appid=8bcf7b1c359b8d0ef12bea8694cb66d4`).then(resp => {
+        var dataAbouWeatherInHoursInterval = 'In the city of Pernit';
         //claim all data about weather and clear it
-        var temp = Math.floor(resp.data.list[0].main.temp - 273.15);
-        var date = resp.data.list[0].dt_txt;
-        var clouds = resp.data.list[0].weather[0].description;
 
-        var dataAbouWeatherInHoursInterval = `In the city of Pernit, the air temperature is ${temp} degree Celsius on ${date}, ${clouds}`;
+        var lastDate = resp.data.list[0].dt_txt.split(' ');
+        dataAbouWeatherInHoursInterval += `\n\n${lastDate[0]}`;
+        for (var i = 0; i < resp.data.list.length;) {
+            var temp = Math.floor(resp.data.list[i].main.temp - 273.15);
+            var feelsLike = Math.floor(resp.data.list[i].main.feels_like - 273.15);
+            var currentDate = resp.data.list[i].dt_txt.split(' ');
+            var clouds = resp.data.list[i].weather[0].description;
+
+            if (lastDate[0] != currentDate[0]) {
+                dataAbouWeatherInHoursInterval += `\n\n${currentDate[0]}`;
+                lastDate = currentDate;
+            }
+
+            dataAbouWeatherInHoursInterval += `\n${currentDate[1]} The air temperature is ${temp} degree Celsius, feels like ${feelsLike}, ${clouds}`;
+            i += TimeInterval / 3;
+        }
         //send message with forecast to user
         return bot.sendMessage(chatId, dataAbouWeatherInHoursInterval);
     })
