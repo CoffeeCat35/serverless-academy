@@ -1,8 +1,3 @@
-{"User":"NIkita","Age":"20","Gender":"male"}
-{"User":"Daryna","Age":"20","Gender":"female"}
-{"User":"Daryna","Age":"20","Gender":"female"}
 {"User":"Nikita","Age":"20","Gender":"male"}
+{"User":"Daryna","Age":"20","Gender":"female"}
 {"User":"Danya","Age":"19","Gender":"male"}
-{"User":"Artem","Age":"20","Gender":"male"}
-{"User":"Danya","Age":"19","Gender":"female"}
-{"User":"Danya","Age":"20","Gender":"male"}

@@ -103,8 +103,12 @@ recursionAnswer();
 
 function AddToFile(person) {
     fs.readFile('database.txt', 'utf-8', (err, people) => {
-        if (err) console.log('Error');
-        if (people === '') {//if file has not data, put new from file's start
+        if (err) {
+            fs.writeFile('database.txt', JSON.stringify(person), (err) => {
+                if (err) console.log('Error');
+            });
+        }
+        else if (people === '') {//if file has not data, put new from file's start
             fs.appendFile('database.txt', JSON.stringify(person), (err) => {
                 if (err) console.log('Error');
             })
@@ -119,10 +123,12 @@ function AddToFile(person) {
 
 function ReadFromFile() {
     fs.readFile('database.txt', 'utf-8', (err, data) => {
-        if (err) console.log('Error');
-        people = data.toString();  //parse data from file to string
-        people = people.split('\n'); //split all data by enter
-        Search() //call the function to search the user by name
+        if (err) console.log('There is no data in database');
+        else {
+            people = data.toString();  //parse data from file to string
+            people = people.split('\n'); //split all data by enter
+            Search() //call the function to search the user by name
+        }
     })
 }
 
