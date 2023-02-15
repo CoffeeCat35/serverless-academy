@@ -24,9 +24,6 @@ const token = 'YOUR TELEGRAM BOT TOKEN';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
-let ForecastInThreeHoursInterval;
-let ForecastSixHoursInterval;
-
 //start command
 bot.setMyCommands([
     { command: '/start', description: 'Request a weather forecast' }
