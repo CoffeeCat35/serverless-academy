@@ -1,15 +1,15 @@
 const axios = require('axios');
 const fs = require("fs");
 
-var countTrue = 0;
-var countFalse = 0;
+let countTrue = 0;
+let countFalse = 0;
 
 async function main() {
     filePath = fs.readFileSync("./JSONFiles.txt", 'utf-8');
     filePath = filePath.split('\n');
 
-    var countError = 0;
-    for (var i = 0; i < filePath.length; i++) {
+    let countError = 0;
+    for (let i = 0; i < filePath.length; i++) {
         //console.log(filePath[i])
         await axios.get(filePath[i]).then(async (resp) => {
             test = resp.data;

@@ -1,6 +1,6 @@
 //Show only unique words
 function UniqueWords(Array) {
-    var ArrayOfWords = [];                                          //Create new array for words
+    let ArrayOfWords = [];                                          //Create new array for words
     Array.forEach(newElement => {
         if (isNaN(newElement)) ArrayOfWords.push(newElement);       //if element isn't a number add it to array
     });

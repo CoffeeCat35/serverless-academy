@@ -10,7 +10,7 @@ const program = require('commander');
 
 
 bot.on('message', (msg) => {
-    var chatId = msg.chat.id;
+    let chatId = msg.chat.id;
     if (msg.text === '/start') {  // create file for UserId
         fs.writeFile(path.join(__dirname, 'UserId.txt'), chatId.toString(), (err) => {
             if (err) throw err;

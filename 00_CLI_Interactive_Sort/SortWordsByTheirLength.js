@@ -1,6 +1,6 @@
 //Display words in ascending order by number of letters in the word
 function SortWordsByTheirLength(Array) {
-    var ArrayOfNumbers = [];                                        //Create new array for words
+    let ArrayOfNumbers = [];                                        //Create new array for words
     Array.forEach(newElement => {
         if (isNaN(newElement)) ArrayOfNumbers.push(newElement);     //if element isn't a number add it to array
     });

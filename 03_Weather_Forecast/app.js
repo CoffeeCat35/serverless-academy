@@ -59,16 +59,16 @@ bot.on('message', (msg) => {
 
 function SendMessageWithWeatherDataWithInterval(chatId, TimeInterval) {
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Penrith&appid=8bcf7b1c359b8d0ef12bea8694cb66d4`).then(resp => {
-        var dataAbouWeatherInHoursInterval = 'In the city of Pernit';
+        let dataAbouWeatherInHoursInterval = 'In the city of Pernit';
         //claim all data about weather and clear it
 
-        var lastDate = resp.data.list[0].dt_txt.split(' ');
+        let lastDate = resp.data.list[0].dt_txt.split(' ');
         dataAbouWeatherInHoursInterval += `\n\n${lastDate[0]}`;
-        for (var i = 0; i < resp.data.list.length;) {
-            var temp = Math.floor(resp.data.list[i].main.temp - 273.15);
-            var feelsLike = Math.floor(resp.data.list[i].main.feels_like - 273.15);
-            var currentDate = resp.data.list[i].dt_txt.split(' ');
-            var clouds = resp.data.list[i].weather[0].description;
+        for (let i = 0; i < resp.data.list.length;) {
+            let temp = Math.floor(resp.data.list[i].main.temp - 273.15);
+            let feelsLike = Math.floor(resp.data.list[i].main.feels_like - 273.15);
+            let currentDate = resp.data.list[i].dt_txt.split(' ');
+            let clouds = resp.data.list[i].weather[0].description;
 
             if (lastDate[0] != currentDate[0]) {
                 dataAbouWeatherInHoursInterval += `\n\n${currentDate[0]}`;

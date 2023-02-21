@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 
 const fs = require('fs');
 
-var person = {      //obj to save data that user will write
+let person = {      //obj to save data that user will write
     User: '',
     Age: '',
     Gender: ''
@@ -143,8 +143,8 @@ function Search() {
             }
         ])
         .then((answers) => {
-            var personName;
-            var countNames = 0; //variable for if there is more than one found users
+            let personName;
+            let countNames = 0; //variable for if there is more than one found users
             for (let i = 0; i < people.length; i++) {
                 personName = ParseName(people[i]); //call function ParseName to take users name from all data
                 if (answers.UserNameToFind.toLowerCase() === personName[1].toLowerCase()) {

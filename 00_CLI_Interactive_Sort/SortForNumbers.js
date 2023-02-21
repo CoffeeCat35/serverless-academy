@@ -1,6 +1,6 @@
 //Sort numbers
 function SortForNumbers(Array, chooseVariation) {
-    var ArrayOfNumbers = [];                                        //Create new array for numbers
+    let ArrayOfNumbers = [];                                        //Create new array for numbers
     Array.forEach(newElement => {
         if (!isNaN(newElement)) ArrayOfNumbers.push(newElement);    //if element is a number add it to array
     });

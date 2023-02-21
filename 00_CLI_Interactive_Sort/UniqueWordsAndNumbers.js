@@ -1,6 +1,6 @@
 //Show unique words and numbers
 function UniqueWordsAndNUmbers(Array) {
-    var ArrayOfNumbersAndWords = [];                                //Create new array
+    let ArrayOfNumbersAndWords = [];                                //Create new array
     Array.forEach(newElement => {
         ArrayOfNumbersAndWords.push(newElement);
     });
